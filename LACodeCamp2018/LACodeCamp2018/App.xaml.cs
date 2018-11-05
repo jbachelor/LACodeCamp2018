@@ -32,6 +32,7 @@ namespace LACodeCamp2018
             System.Console.WriteLine($"{this.GetType().Name}.{nameof(RegisterTypes)}");
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<NextPage, NextPageViewModel>();
         }
 
         protected override void OnStart()
