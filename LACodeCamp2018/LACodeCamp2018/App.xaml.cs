@@ -21,6 +21,7 @@ namespace LACodeCamp2018
 
         protected override async void OnInitialized()
         {
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnInitialized)}");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -28,8 +29,27 @@ namespace LACodeCamp2018
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(RegisterTypes)}");
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnStart)}");
+        }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnSleep)}");
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnResume)}");
         }
     }
 }

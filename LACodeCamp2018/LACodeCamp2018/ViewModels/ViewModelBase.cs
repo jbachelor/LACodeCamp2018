@@ -20,27 +20,28 @@ namespace LACodeCamp2018.ViewModels
 
         public ViewModelBase(INavigationService navigationService)
         {
-            NavigationService = navigationService;
+            System.Console.WriteLine($"{this.GetType().Name}:  ctor");
+            NavigationService = navigationService;   
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatedFrom)}");
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatedTo)}");
         }
 
         public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
-
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatingTo)}");
         }
 
         public virtual void Destroy()
         {
-
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(Destroy)}");
         }
     }
 }
