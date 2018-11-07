@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,12 @@ namespace LACodeCamp2018.ViewModels
     {
         public DelegateCommand NavToNextPageCommand { get; set; }
 
-        public MainPageViewModel(INavigationService navigationService)
+        IPageDialogService _pageDialogService;
+
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
             : base(navigationService)
         {
+            _pageDialogService = pageDialogService;
             Title = "Main Page";
             NavToNextPageCommand = new DelegateCommand(OnNavToNextPageTapped);
         }
