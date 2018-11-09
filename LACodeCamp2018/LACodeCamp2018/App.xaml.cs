@@ -4,6 +4,8 @@ using LACodeCamp2018.ViewModels;
 using LACodeCamp2018.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LACodeCamp2018.Services;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace LACodeCamp2018
@@ -33,6 +35,16 @@ namespace LACodeCamp2018
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<NextPage, NextPageViewModel>();
+
+            containerRegistry.RegisterSingleton<IUserEventTracker, UserEventTracker>();
+
+            ResolveServices();
+        }
+
+        private void ResolveServices()
+        {
+            System.Console.WriteLine($"{this.GetType().Name}.{nameof(ResolveServices)}");
+            Container.Resolve<IUserEventTracker>();
         }
 
         protected override void OnStart()
