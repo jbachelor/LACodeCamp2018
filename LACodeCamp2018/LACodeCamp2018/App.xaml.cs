@@ -12,6 +12,8 @@ namespace LACodeCamp2018
 {
     public partial class App
     {
+        IUserEventTracker _userEventTracker;
+
         /* 
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor. 
@@ -44,7 +46,7 @@ namespace LACodeCamp2018
         private void ResolveServices()
         {
             Console.WriteLine($"{this.GetType().Name}.{nameof(ResolveServices)}");
-            Container.Resolve<IUserEventTracker>();
+            _userEventTracker = Container.Resolve<IUserEventTracker>();
         }
 
         protected override void OnStart()
