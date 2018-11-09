@@ -23,7 +23,7 @@ namespace LACodeCamp2018
 
         protected override async void OnInitialized()
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnInitialized)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(OnInitialized)}");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -31,7 +31,7 @@ namespace LACodeCamp2018
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(RegisterTypes)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(RegisterTypes)}");
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<NextPage, NextPageViewModel>();
@@ -43,26 +43,26 @@ namespace LACodeCamp2018
 
         private void ResolveServices()
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(ResolveServices)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(ResolveServices)}");
             Container.Resolve<IUserEventTracker>();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnStart)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(OnStart)}");
         }
 
         protected override void OnSleep()
         {
             base.OnSleep();
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnSleep)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(OnSleep)}");
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnResume)}");
+            Console.WriteLine($"{this.GetType().Name}.{nameof(OnResume)}");
         }
     }
 }
