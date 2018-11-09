@@ -18,7 +18,7 @@ namespace LACodeCamp2018.Services
             _eventAggregator = eventAggregator;
         }
 
-        public void TrackEvent(string userEvent)
+        private void TrackEvent(string userEvent)
         {
             Console.WriteLine($"{this.GetType().Name}.{nameof(TrackEvent)}:  {userEvent}");
             _trackedEventsDict.Add(DateTime.Now, userEvent);

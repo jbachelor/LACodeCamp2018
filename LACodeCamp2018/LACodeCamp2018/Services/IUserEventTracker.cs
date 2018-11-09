@@ -7,6 +7,5 @@ namespace LACodeCamp2018.Services
     {
         Dictionary<DateTime, string> GetEvents();
         KeyValuePair<DateTime, string> GetLastEvent();
-        void TrackEvent(string userEvent);
     }
 }
