@@ -45,8 +45,7 @@ namespace LACodeCamp2018.ViewModels
 
         private void OnItemTapped(string trackedEvent)
         {
-            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnItemTapped)}: {trackedEvent}");
-            _pageDialogService.DisplayAlertAsync("Tracked Event", trackedEvent, "OK");
+            _pageDialogService.DisplayAlertAsync("Tracked Event", trackedEvent, "wicked");
         }
 
     }
