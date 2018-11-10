@@ -12,7 +12,6 @@ namespace LACodeCamp2018
 {
     public partial class App
     {
-        IUserEventTracker _userEventTracker;
 
         /* 
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
@@ -39,14 +38,6 @@ namespace LACodeCamp2018
             containerRegistry.RegisterForNavigation<NextPage, NextPageViewModel>();
 
             containerRegistry.RegisterSingleton<IUserEventTracker, UserEventTracker>();
-
-            ResolveServices();
-        }
-
-        private void ResolveServices()
-        {
-            Console.WriteLine($"{this.GetType().Name}.{nameof(ResolveServices)}");
-            _userEventTracker = Container.Resolve<IUserEventTracker>();
         }
 
         protected override void OnStart()
