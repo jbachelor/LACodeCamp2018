@@ -4,5 +4,13 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LACodeCamp2018.Views.NextPage">
-  
+    <ListView ItemsSource="{Binding UserEvents}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Value}"
+                          Detail="{Binding Key}"
+                          DetailColor="Fuchsia" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
