@@ -1,5 +1,6 @@
 ﻿using LACodeCamp2018.Views;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -16,8 +17,10 @@ namespace LACodeCamp2018.ViewModels
 
         IPageDialogService _pageDialogService;
 
-        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
-            : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService, 
+            IPageDialogService pageDialogService,
+            IEventAggregator eventAggregator)
+            : base(navigationService, eventAggregator)
         {
             _pageDialogService = pageDialogService;
             Title = "Main Page";
@@ -37,7 +40,7 @@ namespace LACodeCamp2018.ViewModels
 
             if (userWouldLikeToNavigate)
             {
-                await NavigationService.NavigateAsync(nameof(NextPage));
+                await _navigationService.NavigateAsync(nameof(NextPage));
             }
         }
     }

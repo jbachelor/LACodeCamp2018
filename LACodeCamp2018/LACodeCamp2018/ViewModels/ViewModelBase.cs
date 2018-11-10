@@ -1,15 +1,13 @@
-﻿using Prism.Commands;
+﻿using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LACodeCamp2018.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; private set; }
+        protected INavigationService _navigationService { get; private set; }
+        protected IEventAggregator _eventAggregator { get; private set; }
 
         private string _title;
         public string Title
@@ -18,10 +16,11 @@ namespace LACodeCamp2018.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             System.Console.WriteLine($"{this.GetType().Name}:  ctor");
-            NavigationService = navigationService;   
+            _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
