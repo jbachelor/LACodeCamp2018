@@ -1,4 +1,5 @@
-﻿using LACodeCamp2018.Views;
+﻿using LACodeCamp2018.Services;
+using LACodeCamp2018.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -29,14 +30,14 @@ namespace LACodeCamp2018.ViewModels
 
         private async void OnNavToNextPageTapped()
         {
-            Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavToNextPageTapped)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnNavToNextPageTapped)}");
 
             bool userWouldLikeToNavigate = await _pageDialogService.DisplayAlertAsync("Really?",
                 "Are you sure you would like to navigate to the magical, mystical next page?",
                 "Yes!",
                 "Nope");
 
-            Console.WriteLine($"User has responded to the alert. Do they wish to navigate:  {userWouldLikeToNavigate}.");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"User has responded to the alert. Do they wish to navigate:  {userWouldLikeToNavigate}.");
 
             if (userWouldLikeToNavigate)
             {

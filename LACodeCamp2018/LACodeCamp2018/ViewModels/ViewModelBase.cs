@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using LACodeCamp2018.Services;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -18,29 +19,29 @@ namespace LACodeCamp2018.ViewModels
 
         public ViewModelBase(INavigationService navigationService, IEventAggregator eventAggregator)
         {
-            System.Console.WriteLine($"{this.GetType().Name}:  ctor");
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}:  ctor");
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatedFrom)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnNavigatedFrom)}");
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatedTo)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnNavigatedTo)}");
         }
 
         public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(OnNavigatingTo)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnNavigatingTo)}");
         }
 
         public virtual void Destroy()
         {
-            System.Console.WriteLine($"{this.GetType().Name}.{nameof(Destroy)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(Destroy)}");
         }
     }
 }
