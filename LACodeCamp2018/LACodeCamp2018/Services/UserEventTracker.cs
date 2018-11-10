@@ -16,6 +16,8 @@ namespace LACodeCamp2018.Services
             Console.WriteLine($"{this.GetType().Name}:  ctor");
             _trackedEventsDict = new Dictionary<DateTime, string>();
             _eventAggregator = eventAggregator;
+
+            _eventAggregator.GetEvent<TrackUserEvent>().Subscribe(TrackEvent);
         }
 
         private void TrackEvent(string userEvent)
