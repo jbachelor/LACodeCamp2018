@@ -14,12 +14,14 @@ namespace LACodeCamp2018.ViewModels
 	{
         protected IUserEventTracker _userEventTracker;
 
-        private ObservableCollection<KeyValuePair<DateTime, string>> _userEvents;
-        public ObservableCollection<KeyValuePair<DateTime, string>> UserEvents
+        private ObservableCollection<string> _userEvents;
+        public ObservableCollection<string> UserEvents
         {
             get { return _userEvents; }
             set { SetProperty(ref _userEvents, value); }
         }
+
+        public DelegateCommand<string> ItemTappedCommand { get; set; }
 
         public NextPageViewModel(INavigationService navigationService,
             IEventAggregator eventAggregator,
@@ -27,13 +29,20 @@ namespace LACodeCamp2018.ViewModels
             : base(navigationService, eventAggregator)
         {
             _userEventTracker = userEventTracker;
+            ItemTappedCommand = new DelegateCommand<string>(OnItemTapped);
         }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
             Dictionary<DateTime, string> trackedEvents = _userEventTracker.GetEvents();
-            UserEvents = new ObservableCollection<KeyValuePair<DateTime, string>>(trackedEvents);
+            UserEvents = new ObservableCollection<string>(trackedEvents.Values);
         }
+
+        private void OnItemTapped(string trackedEvent)
+        {
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnItemTapped)}: {trackedEvent}");
+        }
+
     }
 }
