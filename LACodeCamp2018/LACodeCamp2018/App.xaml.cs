@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using LACodeCamp2018.Services;
 using System;
+using Prism.Events;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace LACodeCamp2018
@@ -24,7 +25,7 @@ namespace LACodeCamp2018
 
         protected override async void OnInitialized()
         {
-            Console.WriteLine($"{this.GetType().Name}.{nameof(OnInitialized)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnInitialized)}");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -38,24 +39,34 @@ namespace LACodeCamp2018
             containerRegistry.RegisterForNavigation<NextPage, NextPageViewModel>();
 
             containerRegistry.RegisterSingleton<IUserEventTracker, UserEventTracker>();
+
+            ResolveServices();
+        }
+
+        private IEventAggregator _eventAggregator;
+
+        private void ResolveServices()
+        {
+            _eventAggregator = Container.Resolve<IEventAggregator>();
+            Container.Resolve<IUserEventTracker>();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            Console.WriteLine($"{this.GetType().Name}.{nameof(OnStart)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnStart)}");
         }
 
         protected override void OnSleep()
         {
             base.OnSleep();
-            Console.WriteLine($"{this.GetType().Name}.{nameof(OnSleep)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnSleep)}");
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            Console.WriteLine($"{this.GetType().Name}.{nameof(OnResume)}");
+            _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnResume)}");
         }
     }
 }
