@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ namespace LACodeCamp2018.ViewModels
 	public class NextPageViewModel : ViewModelBase
 	{
         protected IUserEventTracker _userEventTracker;
+        protected IPageDialogService _pageDialogService;
 
         private ObservableCollection<string> _userEvents;
         public ObservableCollection<string> UserEvents
@@ -25,10 +27,12 @@ namespace LACodeCamp2018.ViewModels
 
         public NextPageViewModel(INavigationService navigationService,
             IEventAggregator eventAggregator,
-            IUserEventTracker userEventTracker)
+            IUserEventTracker userEventTracker,
+            IPageDialogService pageDialogService)
             : base(navigationService, eventAggregator)
         {
             _userEventTracker = userEventTracker;
+            _pageDialogService = pageDialogService;
             ItemTappedCommand = new DelegateCommand<string>(OnItemTapped);
         }
 
@@ -42,6 +46,7 @@ namespace LACodeCamp2018.ViewModels
         private void OnItemTapped(string trackedEvent)
         {
             _eventAggregator.GetEvent<TrackUserEvent>().Publish($"{this.GetType().Name}.{nameof(OnItemTapped)}: {trackedEvent}");
+            _pageDialogService.DisplayAlertAsync("Tracked Event", trackedEvent, "OK");
         }
 
     }
